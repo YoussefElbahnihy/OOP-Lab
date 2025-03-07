@@ -1,1 +1,47 @@
+//Solved by Naira Awad
 
+#include<iostream>
+#include<cstring>
+#include<cmath>
+using namespace std;
+
+class EQ {
+	float a, b, c;
+public:
+	EQ(float x, float y, float z):a(x),b(y),c(z){}
+	EQ(const EQ &ob) {
+		a = ob.a;
+		b = ob.b;
+		c = ob.c;
+	}
+	void solve() {
+	float 	d = pow(b, 2)-4*a*c;
+	if (d > 0) {
+		cout << "The roots are real and different." << endl;
+		cout << (-b + sqrt(d))/2*a <<endl;
+		cout << (-b - sqrt(d))/ 2 * a <<endl;
+	}
+	else if (d == 0) {
+		cout << "The root is real and same." << endl;
+		cout << (-b) / 2 * a<<endl;
+	
+	}
+	else {
+		cout << "The roots are complex and different." << endl;
+		cout << (-b) / 2 * a << "+i" << (sqrt(-d)) / 2 * a << "\n";
+		cout << (-b) / 2 * a << "-i" << (sqrt(-d)) / 2 * a << "\n";
+	}
+	
+ }
+};
+
+
+int main() {
+	EQ obj(1,2,2);
+	//copy constructor
+	EQ obj1(obj);
+	obj.solve();
+	cout<<"================================\n";
+	obj1.solve();
+	return 0;
+}
