@@ -3,8 +3,8 @@
 - ## Week 15/2/2025 ( Sheet 1 ) 
    
   - **Sheet Questions:**
-	   - [ ] [ not solved yet ] [Question one] .
-	   - [x] [ Solved by\ **Youssef Ahmed** ] [Question two](https://github.com/YoussefElbahnihy/OOP-Lab/blob/ccdc2075232975391ae8c306434f3e83e974a4c1/Sheet%201/Question%20one) .
+	   - [ ] [ not solved yet ] [Question one](https://github.com/YoussefElbahnihy/OOP-Lab/blob/ccdc2075232975391ae8c306434f3e83e974a4c1/Sheet%201/Question%20one) .
+	   - [x] [ Solved by\ **Youssef Ahmed** ] [Question two] .
 	   - [x] [ Solved by\ **Ziad Ashraf** ] Homework Question .
 
 ---
