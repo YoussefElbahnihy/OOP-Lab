@@ -1,0 +1,118 @@
+//Solved by\ Ziad Ashraf
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+double factor(int b)
+{
+	b = abs(b);
+	int fact = 1;
+	for(int i = 1 ; i <= b ; i++ )
+	{
+		fact *= i;
+	}
+	return fact;
+}
+double comb(int a , int b)
+{
+	if (b > a)
+		return 0;
+	else
+		return factor(a) / (factor(b) * factor(a-b));
+}
+
+struct Data
+{
+	float x;
+	float D[20];
+	double S[20];
+	int n;
+void read()
+{
+	cout<<"enter number of element = ";
+	cin>>n;
+	cout<<"enter element of D :"<<endl; 
+	for(int i = 0 ; i < n ; i++)
+{
+		cin>>D[i];
+		
+		if(D[i] == 0)
+			D[i] = 1;
+}
+	cout<<"enter value of X = ";
+	cin>>x;
+	while (x == 0) {
+    cout << "X cannot be zero Please re enter: ";
+    cin >> x;
+}
+	for(int i = 0 ; i < n ; i++)
+{
+		S[i] = 0;
+	for (int j = 0 ; j <= i ; j++ )
+{
+		S[i] += comb(i , j) * ( x / abs(D[j]));
+}
+
+		
+}
+}
+void display()
+{
+	cout<<"==================================="<<endl;
+	cout<<"\t"<<"i"<<"\t"<<"D[i]"<<"\t"<<"S[i]"<<endl;
+	cout<<"==================================="<<endl;
+	for(int i = 0 ; i < n ; i++)
+{
+	cout<<"\t"<<i<<"\t"<<D[i]<<"\t"<<S[i]<<endl;
+}
+	cout<<"minimum value = "<<mini()<<endl;
+}
+double mini()
+{
+	double minvalue = S[0];
+	for(int i = 1 ; i < n ; i++)
+	{
+		if(S[i] < minvalue)
+			minvalue = S[i];
+	}
+	return minvalue;
+}
+};
+void compare(Data x , Data y)
+{
+	double min_1 , min_2 ;
+	min_1 = x.mini();
+	min_2 = y.mini();
+
+	cout<<"minimum value of first object = "<<min_1<<endl;
+	cout<<"========================================="<<endl;
+	cout<<"minimum value of second object = "<<min_2<<endl;
+	cout<<"========================================="<<endl;
+	if (min_1 < min_2)
+		cout<<"first object has lower value "<<endl;
+	else if (min_2 < min_1)
+		cout<<"second object has lower value "<<endl;
+	else
+		cout<<"two numbers are equal "<<endl;
+}
+int main()
+{
+	Data x , y;
+	cout<<"enter element of first object : "<<endl;
+	x.read();
+	cout<<"============================================"<<endl;
+	cout<<"enter element of second object : "<<endl;
+	y.read();
+	cout<<"============================================="<<endl;
+	cout<<"Data of first object : "<<endl;
+	x.display();
+	cout<<"============================================="<<endl;
+	cout<<"Data of second object : "<<endl;
+	y.display();
+	cout<<"============================================="<<endl;
+	cout<<"difference between two minimum value = "<<abs(x.mini() - y.mini())<<endl;
+	cout<<"============================================="<<endl;
+	compare(x,y);
+system("pause");
+return 0;
+}
