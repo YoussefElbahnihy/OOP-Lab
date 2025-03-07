@@ -1,1 +1,97 @@
+//Solved by Youssef Gamal
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void read(int a[], int n) {
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "insert the value of number " << i + 1 << " :\t";
+        cin >> a[i];
+    }
+    cout << "\n\n";
+}
+
+bool prime(int a) {
+
+    int root = ceil(sqrt(a));
+    if (a == root * root)
+        return false;
+
+    for (int i = 2; i < root; i++)
+        if (a % i == 0)
+            return false;
+
+    return true;
+}
+//Another way for prime
+bool isPrime(int n)
+{
+	if(n<2)
+		return false;
+	for (int i =2;i*i <=n ;i++)
+	{
+		if(n % i == 0)
+			return false;
+	}
+	return true;
+}
+
+bool even(int a) {
+
+    if (a % 2 == 0)
+        return true;
+    return false;
+}
+float average(int a[], int n ) {
+    float sum = 0;
+    int num = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (prime(a[i])) {
+            sum += a[i];
+            num++;
+        }
+    }
+    return sum / num;
+}
+
+float average(int a[],int n, char c ) {
+    float sum = 0;
+    int num = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (even(a[i])  &&  ( c == 'e' || c =='E' )) {
+            sum += a[i];
+            num++;
+        }
+        else if(!even(a[i]) && ( c == 'o' || c =='O' )){
+            sum += a[i];
+            num++;
+        }
+    }
+    return sum / num;
+}
+int main()
+{
+    int arr[100],m;
+    cout << "Insert the preffered number of elements for the array :\t"; cin >> m;
+    read(arr , m);
+	
+    cout << "average of the prime numbers in the array is : " << average(arr,m) << "\n";
+
+    cout<<"Enter (E or e) for calculate Average for Even numbers. OR Enter (O or o) for calculate Average for Odd numbers.\n ";
+	char c;
+	cin>>c;
+	
+	string ch;
+	if(c == 'e' || c == 'E')
+		ch = "Even";
+	else if (c == 'O' || c=='o')
+		ch = "Odd";
+    cout << "average of the "<<ch<<" numbers in the array is : " << average(arr, m, c) << "\n";
+}
+
 
