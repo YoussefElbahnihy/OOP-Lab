@@ -1,1 +1,98 @@
+//Solved by\ mohamed Ahmed Kamal
 
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+struct Data
+{
+	float R, I;
+};
+class Complex
+{
+	Data C[20];
+	float D[20];
+	int n;
+public:
+	void Read()
+	{
+		cin >> n;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> C[i].I >> C[i].R;
+		}	
+		for (int i = 0; i < n; i++)
+		{
+			D[i] = sqrt(pow(C[i].I, 2) + pow(C[i].R, 2));
+		}
+	}
+	void Display_C_D() 
+	{
+		for (int i = 0; i < n; i++) 
+		{
+			cout << C[i].R << " + i" << C[i].I << endl;
+		}
+		for (int i = 0; i < n; i++)
+		{
+			cout << "D[" << i << "] = " << D[i] << endl;
+		}
+	}
+	void sort() 	
+	{
+		for (int i = 0; i < n - 1; i++)
+		{
+			for (int j = i + 1; j < n; j++)
+			{
+				if (D[i] > D[j])
+				{
+					swap(C[i], C[j]);
+				}
+			}
+		}
+	}
+	double Average()
+	{
+		double sum = 0;
+		for (int i = 0; i <n; i++) 
+		{
+			sum += D[i];
+		}
+		return sum / n;
+	}
+	void Compare(Complex obj)
+	{
+		
+		if (obj.Average() > Average())
+		{
+			cout << "The Minimum Average is" << Average() << endl;
+		}
+		else 
+			cout << "The Minimum Average is" << obj.Average() << endl;
+	}
+};
+
+int main()
+{
+	Complex object1, object2;
+	cout << "Enter data of the first object: " << endl;
+	object1.Read();
+	cout << "Enter data of the Second object: " << endl;
+	object2.Read();
+	cout << "The data first object before sorting: " << endl;
+	object1.Display_C_D();
+	cout << "The data second object before sorting: " << endl;
+	object2.Display_C_D();
+	object1.sort(), object2.sort();
+	cout << "The data first object after sorting: " << endl;
+	object1.Display_C_D();
+	cout << "The data second object after sorting: " << endl;
+	object2.Display_C_D();
+	cout<<"Average of first object:\n";
+	cout<<object1. Average();
+	cout<<"\nAverage of second object:\n";
+	cout<<object2. Average();
+	cout<<"\nCompare 2 objects\n";
+	object1.Compare(object2);
+
+	return 0;
+}
