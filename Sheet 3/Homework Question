@@ -1,1 +1,104 @@
+//Solve by\ Ahmed Mohamed
 
+#include <iostream>
+#include<cmath>
+using namespace std;
+class Ser2;
+class Ser1 {
+    float SX[30], X[30];
+    int n;
+public:
+    void read() {
+        cout << "Enter number of elements in Ser1 (max 30): ";
+        cin >> n;
+        cout << "Enter " << n << " values for X: "<<endl;
+        for (int i = 0; i < n; i++) {
+            cout << "X[" << i << "]= ";
+            cin >> X[i];
+            SX[i] = 0;
+            for (int j = 0; j <= i; j++) {
+                SX[i] += (j + i) / (pow(X[i], 2) + i + 1);
+            }
+        }
+    }
+    void displaySX() {      
+        for (int i = 0; i < n; i++) {
+            cout << "SX[" << i << "]= " << SX[i] << endl;
+        }
+      
+    }
+    float max1() {
+        float max=SX[0];
+        for (int i = 0; i < n; i++) {
+            if (max < SX[i]) {
+                max = SX[i];
+            }
+        }
+        return max;
+    }
+    friend void compare(Ser1 s1, Ser2 s2);
+    friend float avg(Ser1 s1, Ser2 s2);
+    
+}s;
+class Ser2 {
+    float SY[30], Y[30];
+    int m;
+public:
+    void read() {
+        cout << "Enter number of elements in Ser2 (max 30): ";
+        cin >> m;
+        cout << "Enter " << m << " values for Y: " << endl;
+        for (int i = 0; i < m; i++) {
+            cout << "Y[" << i << "]= ";
+            cin >> Y[i];
+            SY[i] = 0;
+            for (int j = 0; j <= i; j++) {
+                SY[i] += (j + i) / (pow(Y[i], 3) + i + 1);
+            }
+        }
+    }
+    
+    void displaySX() {
+        for (int i = 0; i < m; i++) {
+            cout << "SY[" << i << "]= " << SY[i] << endl;
+        }
+
+    }
+    float max1() {
+        float max = SY[0];
+        for (int i = 0; i < m; i++) {
+            if (max < SY[i]) {
+                max = SY[i];
+            }
+        }
+        return max;
+    }
+    friend void compare(Ser1 s1, Ser2 s2);
+    friend float avg(Ser1 s1, Ser2 s2);
+    
+}l;
+void compare(Ser1 s1, Ser2 s2) {
+    if (s1.max1() > s2.max1()) {
+        cout << "The Maximum of two objects in SX Is = " << s1.max1() << endl;
+        s1.displaySX();
+    }
+    else{
+        cout << "The Maximum of two objects in SY Is = " << s2.max1() << endl;
+        s2.displaySX();
+    }
+}
+float avg(Ser1 s1, Ser2 s2) {
+    float average = (s1.SX[0] + s1.SX[s1.n - 1] + s2.SY[0] + s2.SY[s2.m - 1]) / 4;
+    return average;
+}
+int main() {
+    s.read();
+    s.displaySX();
+    cout << "The Maximum Value in SX : " << s.max1() << endl;
+    l.read();
+    l.displaySX();
+    cout << "The Maximum Value in SY : " << l.max1() << endl;
+    compare(s,l);
+    cout << "The Average is = " << avg(s,l) << endl;
+    return 0;
+}
