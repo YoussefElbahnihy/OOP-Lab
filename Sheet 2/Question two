@@ -1,1 +1,75 @@
+// Solved by Khaled Mohamed Abdulhamed
 
+#include <iostream>
+#include <string>
+using namespace std;
+class student {
+    string name ;
+    int id ;
+    float age;
+    float g[3];
+    float gpa;
+public:
+    student(string na="no name",int i=0,float ag=0,float g1=0,float g2=0,float g3=0){
+        name=na;
+        id=i;
+        age=ag;
+        g[0]=g1;
+        g[1]=g2;
+        g[2]=g3;
+        gpa=(((g[0]+g[1]+g[2])/450)*4);
+    }
+    void display(){
+        cout<<"name: "<<name<<endl;
+        cout<<"Id: "<<id<<endl;
+        cout<<"age: "<<age<<endl;
+        cout<<"grades: "<<g[0]<<", "<<g[1]<<", "<<g[2]<<endl;
+        cout<<"gpa: "<<gpa<<endl;
+    }
+    float getgpa(){
+        return gpa;
+    }
+    
+    //This solution if you learn about Static Functions
+    //In This sheet. you do not know about Static function
+    //Can Make compare in main function 
+    static student maxgpa(student s1 , student s2 , student s3){
+        if(s1.gpa>=s2.gpa && s1.gpa>=s3.gpa){
+            return s1;
+        }
+        else if(s2.gpa>=s1.gpa && s2.gpa>=s3.gpa){
+            return s2;
+        }
+        else{
+            return s3;
+        }
+    }
+
+};
+
+int main(){
+    student s1("khalid",1,20,100,120,130);
+    student s2("yousef",2,20,90,80,70);
+    student s3("ahmed",3,20,0,79,50);
+    cout<<"data of students:"<<endl;
+    cout<<"===========================First Student==================================\n";
+    s1.display();
+    cout<<"==========================Second Student==================================\n";
+    s2.display();
+    cout<<"===========================Third Student================================\n";
+    s3.display();
+    student firststudent=student::maxgpa(s1,s2,s3);
+    cout<<"student has high gpa"<<endl;
+    firststudent.display();
+    
+    
+    //compare in main function without static
+    student maxstudent = s1;
+	if (s2.getgpa() > maxstudent.getgpa())
+		maxstudent = s2;
+	if (s3.getgpa() > maxstudent.getgpa())
+		maxstudent = s3;
+	cout<<"\nStudent has high gps with compare in main function\n";
+	maxstudent.display();
+    return 0;
+}
