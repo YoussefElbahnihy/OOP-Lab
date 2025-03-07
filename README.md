@@ -3,7 +3,7 @@
 - ## Week 15/2/2025 ( Sheet 1 ) 
    
   - **Sheet Questions:**
-	   - [ ] [ not solved yet ] [ Question one ] (Sheet 1/Question two) .
+	   - [ ] [ not solved yet ] [ Question one ](Sheet 1/Question two) .
 	   - [x] [ Solved by\ **Youssef Ahmed** ] Question two .
 	   - [x] [ Solved by\ **Ziad Ashraf** ] Homework Question .
 
