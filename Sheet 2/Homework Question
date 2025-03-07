@@ -1,1 +1,84 @@
+// Solved by saif amr
+//Solved by Ahmed Salah
 
+#include <iostream>
+
+using namespace std;
+class GCD {
+	int X[20], Y[20];
+	int G[20], n;
+public:
+	int calcGCD(int a, int b) {
+		
+        if (b == 0) return a;
+        return calcGCD(b, a % b);
+	}
+	void readData() {
+		cout << "enter number of elements you want, maximum is 20" << endl;
+		cin >> n;
+		for (int i = 0; i < n; i++) {
+			cout << "X[" << i << "] is ";
+			cin >> X[i];
+		}
+		for (int i = 0; i < n; i++) {
+			cout << "Y[" << i << "] is ";
+			cin >> Y[i];
+		}
+		for (int i = 0; i < n; i++) {
+			G[i] = calcGCD(X[i], Y[i]);
+		}
+	}
+	void display() {
+
+		cout << "\nX\tY\tGCD" << endl;
+		cout << "-------------------------------" << endl;
+		for (int i = 0; i < n; i++) {
+			cout << X[i] << "\t" << Y[i] << "\t" << G[i] <<endl;
+		}
+	}
+	int min() {
+		int minGCD = G[0];
+		for (int i = 0; i < n; i++) {
+			if (G[i] < minGCD) {
+				minGCD = G[i];
+			}
+		}
+		cout << "Smallest GCD is " << minGCD<<endl;
+		return minGCD;
+	}
+	void compareMinGCD(GCD obj) {
+        int minGCD1 = min();
+        int minGCD2 = obj.min();
+ 
+        if (minGCD1 < minGCD2)
+        {
+            cout << "Object 1 has the minimum GCD." << endl;
+            display();
+        }
+        else if (minGCD2 < minGCD1)
+        {
+            cout << "Object 2 has the minimum GCD." << endl;
+            obj.display();
+        }
+        else
+        {
+            cout << "Both objects have the same minimum GCD." << endl;
+            display();
+        }
+    }
+};
+
+int main() {
+	
+	GCD obj1;
+	obj1.readData();
+	obj1.min();
+	obj1.display();
+	GCD obj2;
+	obj2.readData();
+	obj2.min();
+	obj2.display();
+	obj1.compareMinGCD(obj2);
+	system("pause");
+	return 0;
+}
