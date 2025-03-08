@@ -26,7 +26,7 @@
   - **Sheet Questions:**
 	   - [ ] [ not solved yet ] [Question one](https://github.com/YoussefElbahnihy/OOP-Lab/blob/7b3d65faa09ffbff4164b15eccde1f2b5f0b4e78/Sheet%203/Question%20one) .
 	   - [ ] [ not solved yet ] [Question two](https://github.com/YoussefElbahnihy/OOP-Lab/blob/7b3d65faa09ffbff4164b15eccde1f2b5f0b4e78/Sheet%203/Question%20two) .
-	   - [ ] [ not solved yet ] [Question three](https://github.com/YoussefElbahnihy/OOP-Lab/blob/7b3d65faa09ffbff4164b15eccde1f2b5f0b4e78/Sheet%203/Question%20three) .
+	   - [x] [ Solved by\ **Youssef Fouad** ] [Question three](https://github.com/YoussefElbahnihy/OOP-Lab/blob/7b3d65faa09ffbff4164b15eccde1f2b5f0b4e78/Sheet%203/Question%20three) .
 	   - [x] [ Solved by\ **Ahmed Mohamed** ] [Homework Question](https://github.com/YoussefElbahnihy/OOP-Lab/blob/7b3d65faa09ffbff4164b15eccde1f2b5f0b4e78/Sheet%203/Homework%20Question) .
      
 
