@@ -1,1 +1,120 @@
+//Solved by Youssef Fouad
 
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+bool prime(int num){
+	if(num < 2)
+		return false;
+    for(int i = 2; i <= num/2; i++){
+        if(num % i == 0){
+            return false;
+        }
+    }
+    return true;
+}
+class Data2;
+class Data1{
+    double D[10][10];
+    int n;
+public:
+    void set(){
+        cout<<"n = ";
+        cin>>n;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n-1 ; j++){
+                cin>>D[i][j];
+            }
+        }
+    }
+    void max(){
+        int i = 0;
+        while(i < n){
+            double mx = D[i][0];
+            for(int j = 1; j < n-1 ; j++){
+                if(mx < D[i][j])
+                    mx = D[i][j];
+            }
+            D[i][n-1] = mx;
+            i++;
+        }
+
+    }
+    
+    void display(){
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n ; j++){
+                cout<<D[i][j]<<"\t";
+            }
+            cout<<endl;
+        }
+    }
+    double sum(){
+        double s = 0;
+        for(int i = 0; i < n; i++){
+            if(prime(D[i][n-1]))
+                s += D[i][n-1];
+        }
+        return s;
+    }
+    friend void compare(Data1 a, Data2 b);
+    friend double sum3(Data1 a, Data2 b);
+};
+class Data2{
+    double D2[10];
+    int m;
+public:
+    void read(){
+        cout<<"m = ";
+        cin>>m;
+        for(int i = 0; i < m; i++){
+            cin>>D2[i];
+        }
+    }
+    double sum2(){
+        double s2 = 0;
+        for(int i = 0; i < m; i++){
+            if(prime(D2[i]))
+                s2 += D2[i];
+        }
+        return s2;
+    }
+    void display2(){
+        for(int i = 0; i < m; i++){
+            cout<<D2[i]<<"\t";
+        }
+        cout<<endl;
+    }
+    friend void compare(Data1 a, Data2 b);
+    friend double sum3(Data1 a, Data2 b);
+};
+void compare(Data1 a, Data2 b){
+    if(a.sum() > b.sum2())
+        a.display();
+    else
+        b.display2();
+}
+double sum3(Data1 a, Data2 b){
+    return (a.sum() + b.sum2());
+}
+int main(){
+    Data1 a;
+    a.set();
+    a.max();
+    a.display();
+    cout<<"sum = "<<a.sum()<<endl;
+    Data2 b;
+    b.read();
+    b.sum2();
+    b.display2();
+    cout<<"\nsum = "<<b.sum2()<<endl;
+
+    compare(a,b);
+    cout<<"\nsum of all = "<<sum3(a,b)<<endl;
+
+
+ system("pause");
+ return 0;
+}
