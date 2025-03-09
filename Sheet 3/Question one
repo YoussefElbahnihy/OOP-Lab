@@ -1,1 +1,57 @@
+//Solved by\ Fatma Ahmed
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student
+	{
+	private:
+
+		string name;
+		float age;
+		int ID;
+		static int count;
+
+	public:
+
+		void Read()
+		{
+			cin >> name >> age;
+		}
+
+		Student ()
+		{
+			ID = count+9700;
+			count++;
+		}
+
+		void Display ()
+		{
+			cout << name <<"\n"<< age <<"\n"<< ID <<"\n";
+		}
+
+		static void Count ()
+		{
+			cout << count <<"\n";
+		}
+	};
+int Student::count=0;
+
+int main ()
+{
+	Student X , Y , Z;
+	X.Read();
+	X.Display();
+
+	Y.Read();
+	Y.Display();
+
+	Z.Read();
+	Z.Display();
+
+	Student::Count();
+
+	system ("pause");
+	return 0;
+}
