@@ -1,1 +1,77 @@
+//Solved by youssef gaber
 
+#include<iostream>
+#include<cmath>
+using namespace std;
+class series {
+	int x[20];
+	float s[20];
+	int n;
+public:
+	int fact(int num) {
+		int f = 1;
+		if (num < 0)
+			num = abs(num);
+		for (int i = 1; i <= num; i++)
+		{
+			f *= i;
+		}
+		return f;
+	}
+	int comb(int a, int b) {
+		return (fact(a)) / (fact(b) * fact(a - b));
+	}
+	void set() {
+		cin >> n;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> x[i];
+		}
+		int sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j <= i; j++)
+			{
+				sum += comb(i, j) * pow(x[i], (j + 1));
+			}
+			s[i] = sum;
+		}
+	}
+	void display() {
+		for (int i = 0; i < n; i++)
+		{
+			cout << "x[" << i << "] = " << x[i] << "		";
+			cout << "s[" << i << "] = " << s[i] << endl;
+		}
+	}
+	friend double avg(series a);
+	friend  series compare(series a, series b);
+};
+double avg(series a) {
+	double max = a.s[0], min = a.s[0];
+	for (int i = 1; i < a.n; i++) {
+		if (max < a.s[i])
+			max = a.s[i];
+		if (min > a.s[i])
+			min = a.s[i];
+	}
+	return (max + min) / 2;
+}
+series compare(series a, series b) {
+	if (avg(a) > avg(b))
+		return a;
+	else
+		return b;
+}
+int main() {
+	series x, y;
+	x.set();
+	x.display();
+	y.set();
+	y.display();
+	cout << "avg x =" << avg(x) << endl;
+	cout << "avg y =" << avg(y) << endl;
+	cout << "the greatest object's average :"<< endl;
+	 compare(x, y).display() ;
+	return 0;
+}
