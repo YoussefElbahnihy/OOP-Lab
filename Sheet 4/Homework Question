@@ -1,0 +1,82 @@
+//Solved by Mostafa Mahmoud
+
+#include<iostream>
+#include<cmath>
+using namespace std;
+class Data {
+	double D[20];
+	double Fact[20];
+	int n;
+public:
+	
+	double factorial(double num)
+	{
+		double Fact = 1;
+			for (int j = 2; j <= num; j++) {
+				Fact *= j;
+			}
+			return Fact;
+	}
+	void read() {
+		cout << "Enter the number of elements " << endl;
+		cin >> n;
+		int sum = 0;
+		for (int i = 0; i < n; i++) {
+			cout << "Enter the value of D[" << i << "] = ";
+			cin >> D[i];
+			sum += D[i];
+			cout << endl;
+			Fact[i] = factorial(sum);
+			
+		}
+	}
+	void display() {
+		for (int i = 0; i < n; i++) {
+			cout<< i <<"\t" << D[i]<<"\t"<<Fact[i] <<endl ;
+		}
+	}
+	Data operator+(Data object) {
+		Data S;
+		S.n = min(n, object.n);
+		double sum=0;
+		for (int i = 0; i <S.n; i++) {
+			S.D[i] = D[i] + object.D[i];
+			sum+= S.D[i];
+			S.Fact[i] = factorial(sum);
+		}
+		return S;
+	}
+	bool operator==(Data object) {
+		if (n != object.n)return false;
+		for (int i = 0; i < n; i++) {
+			if (D[i] != object.D[i])return false;
+		}
+		return true;
+	}
+	bool operator<=(Data object) {
+		for (int i = 0; i < min(n,object.n); i++) {
+			if (Fact[i] > object.Fact[i])return false;
+		}
+		return true;
+	}
+};
+int main() {
+	Data data1, data2,data3;
+	cout << "Enter the values of first object " << endl;
+	data1.read();
+	cout << "Enter the values of second object " << endl;
+	data2.read();
+	cout << "Display the data of first object " << endl;
+	data1.display();
+	cout << "Display the data of second object " << endl;
+	data2.display();
+	data3 = data1 + data2;
+	cout << "After add " << endl;
+	data3.display();
+	if (data1 == data2) { cout << "The two object are equal " << endl; }
+	if (data1 <= data2) { cout << "Fact object 1 <=Fact object 2 " << endl; }
+	else {
+		 { cout << "Fact object1 > Fact object 2 " << endl; }
+	}
+	return 0;
+}
