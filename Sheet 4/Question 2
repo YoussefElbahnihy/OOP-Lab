@@ -1,0 +1,147 @@
+//Solved by\ Mohamed Abdulkareem
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class EQN {
+    float A[20][20];
+    int X[20];
+    int n;
+
+public:
+    void Read() {
+        cout << "Enter dimentions of the Matrix";
+        cin >> n;
+
+        cout << "Enter values of the Matrix:\n";
+        for (int i = 0; i < (n - 1); ++i) {
+            for (int j = 0; j < n; ++j) {
+                cin >> A[i][j];
+            }
+        }
+
+        cout << "Enter values of the Array X:\n";
+        for (int i = 0; i < n; ++i) {
+            cin >> X[i];
+        }
+    }
+
+    void Set_LastRow() {
+        float sum[n] = { 0 };
+        for (int j = 0; j < n ; ++j)
+            for (int i = 0; i < n-1; ++i)
+                sum[j] += (A[i][j])*(X[i]);
+        
+        for (int j = 0; j < n; j++)
+            A[n - 1][j] = sum[j];
+    }
+
+    // i.
+    friend ostream& operator<<(ostream& out, EQN& eqn){
+        for (int i = 0; i < eqn.n; ++i) {
+            for (int j = 0; j < eqn.n; ++j) {
+                out << eqn.A[i][j] << " ";
+            }
+            out << endl;
+        }
+        return out;
+    }
+
+    // ii.
+    int& operator[](int i){
+        if (i >= 0 && i < n) {
+            return X[i];
+        }
+    }
+
+    // iii.
+    EQN& operator+=(EQN& eqn){
+        for (int i = 0; i < n - 1; ++i)
+            for (int j = 0; j < n; ++j)
+                A[i][j] += eqn.A[i][j];
+
+        Set_LastRow();
+        return *this;
+    }
+
+    EQN operator*(float constant){
+        EQN temp = *this;
+        for (int i = 0; i < temp.n; ++i) {
+            for (int j = 0; j < temp.n; ++j) {
+                temp.A[i][j] *= constant;
+            }
+        }
+        temp.Set_LastRow();
+        return temp;
+    }
+
+    // iv.
+    bool operator==(EQN& eqn){
+        for (int i = 0; i < n; ++i) {
+            if (X[i] != eqn.X[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool operator>=( EQN& eqn) {
+    	
+        for (int j = 0; j < n; ++j) {
+            if (A[n - 1][j] < eqn.A[n - 1][j]) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+int main() {
+    EQN eqn1, eqn2;
+
+    eqn1.Read();
+    eqn1.Set_LastRow();
+
+    eqn2.Read();
+    eqn2.Set_LastRow();
+
+    // i. "<<" ( display only A)
+    cout << "Matrix A of eqn1:\n";
+    cout << eqn1;
+
+    cout << "\nMatrix A of eqn2:\n";
+    cout << eqn2;
+
+    // ii. "[]" (return  ith  element of X) 
+    cout << "\nX[2] of eqn1: " << eqn1[2] << endl;
+
+    // iii. +=
+    eqn1 += eqn2;
+    cout << "\nMatrix A of eqn1 after += eqn2:\n\n";
+    cout << eqn1;
+
+    //  *
+    EQN test = eqn1 * 3;
+    cout << "Matrix A of eqn1 after multiplication by 3:\n\n";
+    cout << test;
+
+    // iv. ==
+    if (eqn1 == eqn2) {
+        cout << "eqn1 and eqn2 have the same X values.\n\n";
+    }
+    else {
+        cout << "eqn1 and eqn2 have different X values.\n\n";
+    }
+
+    //  >=
+    if (eqn1 >= eqn2) {
+        cout << "All elements of the last row of eqn1 is greater than or equal to eqn2.\n\n";
+    }
+    else {
+        cout << "All elemens of the last row of eqn1 is less than eqn2.\n";
+    }
+
+
+    system("pause");
+    return 0;
+}
