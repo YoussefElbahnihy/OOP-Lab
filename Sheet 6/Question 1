@@ -1,0 +1,151 @@
+//Solved by youssef Ahmed
+
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+#define el endl;
+
+class Data
+{
+protected:
+
+	float D[30][30];
+	int n;
+public:
+
+	void Read()
+	{
+		cout << "Enter dimension of the matrix ==> "; cin >> n;
+		cout << "Enter elements of matrix ==> ";
+		for (int i = 0; i < n - 1; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				cin >> D[i][j];
+			}
+		}
+	}
+
+	bool PrimeCheck(int x)
+	{
+		if (x < 2) return false;
+        //if (x == 2) return true;
+		for (int i = 3; i * i <= x; i += 2)
+		{
+			if (x % i == 0)
+				return false;
+		}
+		return true;
+	}
+
+	float MaxPrimeColumn(int x)
+	{
+		float max = -999999;
+		for (int i = 0; i < n; i++)
+		{
+			if (PrimeCheck(D[i][x]))
+			{
+				if (D[i][x] > max)
+				{
+					max = D[i][x];
+				}
+			}	
+		}
+		return max;
+	}
+
+	void SetLastColumn()
+	{
+		for (int i = 0; i < n; i++)
+		{
+			D[n - 1][i] = MaxPrimeColumn(i);
+		}
+	}
+
+	virtual float AvrageLastColumn()
+	{
+		float sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			sum += D[n - 1][i];
+		}
+		return (sum / n);
+	}
+
+	void DisplayAvrage()
+	{
+		cout << this->AvrageLastColumn() << el;
+	}
+
+};
+
+class Data1 :public Data
+{
+
+private:
+
+	float D1[30];
+
+public:
+
+	long long Fact(int x)
+	{
+		long long sum = 1;
+		for (int i = 1; i <= x; i++)
+		{
+			sum *= i;
+		}
+		return sum;
+	}
+
+	void Set()
+	{
+		//cout << "Enter number of element ==> "; cin >> n;
+		for (int i = 0; i < n; i++)
+		{
+			D1[i] = Fact(D[n - 1][i]);
+		}
+	}
+
+	void Display()
+	{
+		for (int i = 0; i < n; i++)
+		{
+			cout << "D1[" << i << "] ==> " << D1[i] << el;
+		}
+	}
+
+	float AvrageOfD1()
+	{
+		float sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			sum += D1[i];
+		}
+		return sum / n;
+	}
+
+};
+
+int main()
+{
+	
+	Data* P;
+	Data1 A;
+	P = &A;
+
+	P->Read();
+	P->SetLastColumn();
+	
+	cout << "\nAvrage of last coulmn in matrix is ==> ";
+	P->DisplayAvrage();
+	cout << el;
+
+	A.Set();
+	
+	cout << "\nElements of A is:" << el;
+	A.Display();
+
+	cout << "\nThe avrage of A elements is ==> " << A.AvrageOfD1();
+}
