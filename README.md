@@ -53,5 +53,5 @@
    
   - **Sheet Questions:**
 	   - [x] [ Solved by\ **Youssef Ahmed**] [Question one](https://github.com/YoussefElbahnihy/OOP-Lab/blob/43df1b334ff3c262838ea5b1450ff1552f410233/Sheet%206/Question%201) .
-	   - [ ] [ Solved by\ ****] [Question two]() .
+	   - [x] [ Solved by\ **Khaled Mohamed Abdulhamed**] [Question two](https://github.com/YoussefElbahnihy/OOP-Lab/blob/f8bb9b174272f0955199040d57f8f925aedf6a16/Sheet%206/Question%202) .
 
