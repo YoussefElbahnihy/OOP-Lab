@@ -52,6 +52,6 @@
 - ## Week 11/4/2025 ( Sheet 6 ) 
    
   - **Sheet Questions:**
-	   - [ ] [ Solved by\ ****] [Question one]() .
+	   - [x] [ Solved by\ **Youssef Ahmed**] [Question one](https://github.com/YoussefElbahnihy/OOP-Lab/blob/43df1b334ff3c262838ea5b1450ff1552f410233/Sheet%206/Question%201) .
 	   - [ ] [ Solved by\ ****] [Question two]() .
 
