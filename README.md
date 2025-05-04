@@ -43,7 +43,7 @@
 - ## Week 27/3/2025 ( Sheet 5 ) 
    
   - **Sheet Questions:**
-	   - [X] [ Solved by\ **Youssef Ahmed**] [Question one]() .
+	   - [X] [ Solved by\ **Youssef Ahmed**] [Question one](https://github.com/YoussefElbahnihy/OOP-Lab/blob/46def47593572cb3434e3da7b418f66ca8e1102b/Sheet%205/Question%201) .
 	   - [x] [ Solved by\ **Ahmed Goda**] [Question two](https://github.com/YoussefElbahnihy/OOP-Lab/blob/0739d5f44f4ca1e51903e166b18d23da0a3a5a2e/Sheet%205/Question%202) .
 	   - [x] [ Solved by\ **Nour Khaled** ] [Question three](https://github.com/YoussefElbahnihy/OOP-Lab/blob/95216f9f7b7581dc4cb5594fd5e188ba1b9affaa/Sheet%205/Question%203) .
 
