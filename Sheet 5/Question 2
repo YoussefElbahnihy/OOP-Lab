@@ -1,0 +1,106 @@
+//Solved by Ahmed Goda
+
+#include<iostream>
+#include<string>
+using namespace std;
+struct course {
+	string C_name;
+	float degree;
+	int credit;
+};
+class level {
+protected:
+	course l[5];
+public:
+	void read_data()
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			cout << "enter the name of course " << i + 1 << "\n";
+			cin >> l[i].C_name;
+			cout << "enter the degree of course " << i + 1 << "\n";
+			cin >> l[i].degree;
+			cout << "enter the credit of course " << i + 1 << "\n";
+			cin >> l[i].credit;
+		}
+	}
+	void print()
+	{
+		cout << "\t\tdetails of courses\t\t \n";
+		cout << " name\t\tdegree\t\tcredit\n ";
+		for (int i = 0; i < 5; i++)
+		{
+			cout << l[i].C_name << "\t\t" << l[i].degree << "\t\t" << l[i].credit;
+			cout << "\n";
+		}
+
+	}
+};
+class student :public level {
+private:
+	string name;
+	int id, total_credit;
+	float total_degree;
+	string gpa;
+public:
+	void read()
+	{
+		cout << "enter the student name\n";
+		cin >> name;
+		cout << "enter the student id \n";
+		cin >> id;
+		total_degree = 0;
+		total_credit = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			total_degree += l[i].degree;
+			total_credit += l[i].credit;
+		}
+
+		float avarege_degree = (total_degree / 5);
+
+		if (avarege_degree >= 92)
+			gpa = "A";
+		else if (avarege_degree >= 84)
+			gpa = "B+";
+
+		else if (avarege_degree >= 80)
+			gpa = "B";
+
+		else if (avarege_degree >= 75)
+			gpa = "C+";
+
+		else if (avarege_degree >= 70)
+			gpa = "C";
+
+		else if (avarege_degree >= 60)
+			gpa = "D";
+		else gpa = "F";
+	}
+	void display()
+	{
+		cout << "name is\t" << name << ",\tid is\t " << id<<",\ttotal credit is\t"<<total_credit<<",\ttotal degree ist\t"<<total_degree <<",\tgpa is\t"<<gpa <<"\n";
+		
+	}
+
+};
+
+	int main()
+		{
+		int n;
+		cout << "number of student \n";
+		cin >> n;
+		student A[10];
+		for (int i = 0; i < n; i++)
+		{
+
+			A[i].read_data();
+			A[i].read();
+			A[i].print();
+			A[i].display();
+
+		}
+			return 0;
+		}
+
+
