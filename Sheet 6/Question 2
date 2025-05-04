@@ -1,0 +1,153 @@
+//Solved by Khaled Abdulhamed
+#include <iostream>
+#include<cmath>
+using namespace std;
+class Base {
+protected:
+    int A[30];
+    int a, b, n;
+public:
+    void read() {
+        cout << "enter n" << endl;
+        cin >> n;
+        cout << "enter a" << endl;
+        cin >> a;
+        cout << "enter b" << endl;
+        cin >> b;
+        cout << "enter array A" << endl;
+        for (int i = 0;i < n;i++) {
+            cin >> A[i];
+        }
+    }
+    int fact(int n) {
+        //return 1 not return n
+        if (n < 2)return 1;
+        else return n * fact(n - 1);
+    }
+    virtual int Factmax() {
+        int maxA = A[0];
+        for (int i = 1;i < n;i++) {
+            if (A[i] > maxA) {
+                maxA = A[i];
+            }
+        }
+        return fact(maxA);
+    }
+    void display() {
+        cout << "factorial max:" << this->Factmax() << endl;
+    }
+};
+class Drive1 :virtual public Base {
+protected:
+    long long B[30];
+public:
+    void setB() {
+        for (int i = 0;i < n;i++) {
+            B[i] = 0;
+            if (A[i] % a == 0 && A[i] != 0) {
+                for (int j = 0;j < A[i];j++) {
+                    B[i] += pow(j, 2);
+                }
+            }
+            if (A[i] % a != 0 && A[i] != 0) {
+                for (int j = 0;j < A[i];j++) {
+                    B[i] += pow(j, 3);
+                }
+            }
+        }
+    }
+    int Factmax() {
+        int maxB = B[0];
+        for (int i = 1;i < n;i++) {
+            if (B[i] > maxB) {
+                maxB = B[i];
+            }
+        }
+        return fact(maxB);
+    }
+};
+class Drive2 :virtual public Base {
+protected:
+    long long C[30];
+public:
+    void setC() {
+        for (int i = 0;i < n;i++) {
+            C[i] = 0;
+            if (A[i] % a == 0 && A[i] != 0) {
+                for (int j = 0;j < A[i];j++) {
+                    C[i] += pow(j, 2);
+                }
+            }
+            if (A[i] % a != 0 && A[i] != 0) {
+                for (int j = 0;j < A[i];j++) {
+                    C[i] += pow(j, 3);
+                }
+            }
+        }
+    }
+    int Factmax() {
+        int maxC = C[0];
+        for (int i = 1;i < n;i++) {
+            if (C[i] > maxC) {
+                maxC = C[i];
+            }
+        }
+        return fact(maxC);
+    }
+};
+class Drive :public Drive1, public Drive2 {
+    long long D[3];
+public:
+    void setD() {
+        D[0] = A[0], D[1] = B[0], D[2] = C[0];
+        for (int i = 0;i < n;i++)
+        {
+            if (A[i] > D[0])
+            {
+                D[0] = A[i];
+            }
+            if (B[i] > D[1])
+            {
+                D[1] = B[i];
+            }
+            if (C[i] > D[2])
+            {
+                D[2] = C[i];
+            }
+        }
+    }
+    int Factmax() {
+        int sum = 0;
+        for (int i = 0;i < 3;i++) {
+            sum += D[i];
+        }
+        return fact(sum);
+    }
+};
+int main() {
+    Base* p, A;
+    Drive1 B;
+    Drive2 C;
+    Drive D;
+    cout << "Base class :" << endl;
+    p = &A;
+    p->read();
+    p->display();
+    cout << "Drive1 class :" << endl;
+    p = &B;
+    p->read();
+    B.setB();
+    p->display();
+
+    cout << "Drive2 class :" << endl;
+    p = &C;
+    p->read();
+    C.setC();
+    p->display();
+
+    cout << "Drive class :" << endl;
+    p = &D;
+    p->read();
+    D.setD();
+    p->display();
+}
