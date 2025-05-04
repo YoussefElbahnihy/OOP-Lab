@@ -1,0 +1,160 @@
+//Solved by Mohaimn Mohamed
+
+#include<iostream>
+using namespace std;
+class Data
+{
+	int A[30];
+	double B[30];
+	int n;
+public:
+	bool isPrime(int p)
+	{
+		if(p < 2)
+			return false;
+		for(int i = 2; i <= p/2; i++)
+		{
+			if(p % i == 0)
+				return false;
+		}
+		return true;
+	}
+	long fact(int num)
+	{
+		int f = 1;
+		for(int i = 1; i <= num; i++)
+		{
+			f *= i;
+		}
+		return f;
+	}
+	long combination(int a , int b)
+	{
+		double c =  fact(a) / (fact(b) * fact(a-b));
+		return c;
+	}
+	friend istream& operator >>(istream &in, Data &x)
+	{
+		cout <<"Enter number of Array elements (max 30) : ";
+		in >> x.n;
+		cout <<"Enter elements of Array A : \n";
+		for(int i = 0; i < x.n; i++)
+			cin >> x.A[i];
+		return in;
+	}
+	void setB()
+	{
+		for(int i = 0; i < n; i++)
+		{
+			double sum = 0.0;
+			for(int j = 0; j <= i+1; j++)
+			{
+				if(isPrime(A[i]) == true)
+				{
+					sum += combination(n-i , j+1) * A[i];
+				}
+				else
+				{
+					sum += combination(n-i , j+1) * A[i] * A[i];
+				}
+			}
+			B[i] = sum;
+		}
+		cout << endl;
+	}
+	double AvgPrimeA()
+	{
+		int count = 0;
+		int sum = 0;
+		for(int i = 0; i < n; i++)
+		{
+			if(isPrime(A[i]) == true)
+			{
+				sum += A[i];
+				count++;
+			}
+		}
+		return (float)sum / count;
+	}
+	Data operator++()
+	{
+		for(int i = 0; i < n; i++)
+			++A[i];
+		setB();
+		return *this;
+	}
+	Data operator++(int)
+	{
+		Data t = *this;
+		for(int i = 0; i < n; i++)
+			A[i]++;
+		setB();
+		return t;
+	}
+	friend ostream& operator <<(ostream &out, Data &z)
+	{
+		out <<"Array of A :\n";
+		for(int i = 0; i < z.n; i++)
+			out << z.A[i] <<"\t";
+		out << endl;
+		out <<"Array of B :\n";
+		for(int i = 0; i < z.n; i++)
+			out << z.B[i] <<"\t";
+		out << endl;
+		return out;
+	}
+	Data operator+(Data d1)
+	{
+		Data d2;
+		for(int i = 0; i < n; i++)	
+			d2.A[i] = A[i] + d1.A[i];
+		d2.setB();
+        return d2;
+	}
+	bool operator < (Data d)
+	{
+		//for(int i = 0; i < n; i++)
+		if(AvgPrimeA() > d.AvgPrimeA()) 
+			return false;
+		return true;
+	}
+	bool operator != (Data x) 
+	{
+		for(int i = 0; i < n; i++)
+			if(B[i] != x.B[i])
+				return true;
+		return false;
+	}
+};
+int main()
+{
+	Data ob1 , ob2;
+
+	cout <<"Input of ob1 : \n";
+	cin >> ob1;
+	
+	cout <<"Input of ob2 : \n";
+	cin >> ob2;
+
+	ob1.setB();
+	ob2.setB();
+	
+	cout <<"output of ob1 : \n";
+	cout << ob1;
+	cout <<"output of ob2 : \n";
+	cout << ob2;
+
+	cout <<"Average prime of ob1 : "<< ob1.AvgPrimeA() << endl;
+	cout <<"Average prime of ob2 : "<< ob2.AvgPrimeA() << endl;
+
+	if(ob1.AvgPrimeA() > ob2.AvgPrimeA())
+		cout << ob1 << endl;
+	else
+		cout << ob2 << endl;
+	
+	if(ob1 != ob2)
+		cout << "not equal!" << endl;
+	else
+		cout << "equal" << endl;
+	return 0;
+}
