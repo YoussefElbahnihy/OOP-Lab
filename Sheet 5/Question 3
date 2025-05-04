@@ -1,0 +1,102 @@
+//Solved by Nour Khaled
+
+#include <iostream>
+#include <cmath>
+#include<string>
+using namespace std;
+class Data1 {
+protected:
+    string S1;
+    double D1[20];
+    int a , n;
+public:
+    void read() {
+        cin >> S1 >> a >> n;
+        for (int i = 0; i < n; i++) {
+            cin >> D1[i];
+        }
+    }
+    double sum() {
+        double sum = 0;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i; j < i + 1; j++) {
+                if (fmod(D1[i], a) == 0) {
+                    sum += pow(D1[i], 2 * (j + 1));
+                }
+                else {
+                    sum += pow(D1[i], j + 1);
+                }
+            }
+        }
+        return sum;
+    }
+    void display() {
+        cout << S1 << " " << a << endl;
+        for (int i = 0; i < n; i++) {
+            cout << D1[i] << " ";
+        }
+    }
+};
+class Data2 {
+protected:
+    string S2;
+    double D2[20];
+    int b, m;
+public:
+    void read() {
+        cin >> S2 >> b >> m;
+        for (int i = 0; i < m; i++) {
+            cin >> D2[i];
+        }
+    }
+    double sum() {
+        double sum = 0;
+        for (int i = 0; i < m - 1; i++) {
+            for (int j = i; j < i + 1; j++) {
+                if (D2[i] > b) {
+                    sum += pow(D2[i], 2 * (j + 1));
+                }
+                else {
+                    sum += pow(D2[i], j + 1);
+                }
+            }
+        }
+        return sum;
+    }
+    void display() {
+        cout << S2 << " " << m << endl;
+        for (int i = 0; i < m; i++) {
+            cout << D2[i] << " ";
+        }
+    }
+};
+class Data :public Data1, public Data2 {
+    string ND;
+    int T_sum;
+public:
+    void set() {
+        cin >> ND;
+        Data1::read();
+        Data2::read();
+        T_sum = Data1::sum() + Data2::sum();
+    }
+    void display() {
+        cout << ND << endl;
+        Data1::display();
+        Data2::display();
+        cout << T_sum << endl;
+    }
+};
+int main()
+{
+    Data d1, d2, d3;
+    d1.set();
+    d1.display();
+    cout << "----------------------------------------------------------\n";
+    d2.set();
+    d2.display();
+    cout << "----------------------------------------------------------\n";
+    d3.set();
+    d3.display();
+    return 0;
+}
