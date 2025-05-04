@@ -1,0 +1,153 @@
+//Solved by Youssef Ahmed
+
+#include<iostream>
+#include<string>
+#include<cmath>
+#define el endl;
+
+using namespace std;
+
+
+class Data_X
+{
+	
+public:
+	double X[30];
+	int y, n;
+
+	friend istream& operator >>(istream& in, Data_X& A)
+	{
+		cout << "Enter element y = ";
+		in >> A.y;
+		cout << "Enter number of elements X = ";
+		in >> A.n;
+		cout << "Enter elements of X:" << el;
+		for (int i = 0; i < A.n; i++)
+		{
+			in >> A.X[i];
+		}
+		return in;
+	}
+
+	friend ostream& operator <<(ostream& out, Data_X& A)
+	{
+		out << "Elements of X is:" << el;
+		for (int i = 0; i < A.n; i++)
+		{
+			out << "X[" << i << "] = " << A.X[i] << el;
+		}
+		return out;
+	}
+
+	double sumX()
+	{
+		double sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			sum += X[i];
+		}
+		return sum;
+	}
+
+};
+
+class Data 
+{
+protected:
+	Data_X A[30];
+	double B[30];
+	int n;
+public:
+
+	void read()
+	{
+		cout << "enter number of elements (A): ";
+		cin >> n;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> A[i];
+			B[i] = 0;
+			for (int j = 0; j < A[i].n; j++)
+			{
+				if (fmod(A[i].n , A[i].y ) == 0)
+				{
+					B[i] += A[i].X[j] * A[i].X[j];
+				}
+				else
+				{
+					B[i] += A[i].X[j] * A[i].X[j] * A[i].X[j];
+				}
+			}
+		}
+	}
+
+	friend ostream& operator <<(ostream& out, Data& S)
+	{
+		for (int i = 0; i < S.n; i++)
+		{
+			out << S.A[i]<<el;
+			out << "Value of B[" << i << "] = " << S.B[i] << el;
+		}
+		return out;
+	}
+
+	friend double SumOfX(Data S)
+	{
+		double sum = 0;
+		for (int i = 0; i < S.n; i++)
+		{
+			sum += S.A[i].sumX();
+		}
+		return sum;
+	}
+
+	friend double MaxSum(Data S)
+	{
+		double maxSum = S.A[0].sumX();
+		for (int i = 0; i < S.n - 1; i++)
+		{
+			if (maxSum < S.A[i + 1].sumX())
+			{
+				maxSum = S.A[i + 1].sumX();
+			}
+		}
+		return maxSum;
+	}
+
+	friend bool CompareMax(Data S, Data N)
+	{
+		if (MaxSum(S) > MaxSum(N))
+		{
+			return true;
+		}
+		return false;
+	}
+};
+
+int main() 
+{
+	Data A, B;
+
+	cout << "Enter elements of A:" << el;
+	A.read();
+
+	cout << "\nEnter elements of B:" << el;
+	B.read();
+
+	cout << "\nMax sum between all A element is = " << MaxSum(A) << el;
+	cout << "Max sum between all B element is = " << MaxSum(B) << el;
+
+	if (CompareMax(A, B))
+	{
+		cout << "A is Max than B And = " << MaxSum(A) << el;
+		cout << "A Data is:" << el;
+		cout << A;
+	}
+	else
+	{
+		cout << "B is Max than A And = " << MaxSum(B) << el;
+		cout << "B Data is:" << el;
+		cout << B;
+	}
+	return 0;
+}
