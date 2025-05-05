@@ -1,27 +1,22 @@
-//Solved by Youssef Ahmed
-
 #include<iostream>
-#include<string>
 #include<cmath>
-#define el endl;
 
 using namespace std;
-
+#define el endl
 
 class Data_X
 {
-	
+
 public:
+
 	double X[30];
 	int y, n;
 
 	friend istream& operator >>(istream& in, Data_X& A)
 	{
-		cout << "Enter element y = ";
-		in >> A.y;
-		cout << "Enter number of elements X = ";
-		in >> A.n;
-		cout << "Enter elements of X:" << el;
+		cout << "Enter element y ==> ";  in >> A.y;
+		cout << "Enter number of elements X ==> "; in >> A.n;
+		cout << "Enter elements of X ==> ";
 		for (int i = 0; i < A.n; i++)
 		{
 			in >> A.X[i];
@@ -31,15 +26,15 @@ public:
 
 	friend ostream& operator <<(ostream& out, Data_X& A)
 	{
-		out << "Elements of X is:" << el;
+		out << "Elements of X is :" << el;
 		for (int i = 0; i < A.n; i++)
 		{
-			out << "X[" << i << "] = " << A.X[i] << el;
+			out << "X[" << i << "] ==> " << A.X[i] << el;
 		}
 		return out;
 	}
 
-	double sumX()
+	double SumX()
 	{
 		double sum = 0;
 		for (int i = 0; i < n; i++)
@@ -51,25 +46,27 @@ public:
 
 };
 
-class Data 
+class Data
 {
+
 protected:
+
 	Data_X A[30];
 	double B[30];
 	int n;
+
 public:
 
-	void read()
+	void Read()
 	{
-		cout << "enter number of elements (A): ";
-		cin >> n;
+		cout << "enter number of elements (A,B) ==> "; cin >> n;
 		for (int i = 0; i < n; i++)
 		{
 			cin >> A[i];
 			B[i] = 0;
 			for (int j = 0; j < A[i].n; j++)
 			{
-				if (fmod(A[i].n , A[i].y ) == 0)
+				if (fmod(A[i].X[i], A[i].y) == 0)
 				{
 					B[i] += A[i].X[j] * A[i].X[j];
 				}
@@ -85,8 +82,8 @@ public:
 	{
 		for (int i = 0; i < S.n; i++)
 		{
-			out << S.A[i]<<el;
-			out << "Value of B[" << i << "] = " << S.B[i] << el;
+			out << S.A[i] << el;
+			out << "Value of B[" << i << "] ==> " << S.B[i] << el << el;
 		}
 		return out;
 	}
@@ -96,58 +93,56 @@ public:
 		double sum = 0;
 		for (int i = 0; i < S.n; i++)
 		{
-			sum += S.A[i].sumX();
+			sum += S.A[i].SumX();
 		}
 		return sum;
 	}
 
-	friend double MaxSum(Data S)
+	friend double MaxSumInA(Data S)
 	{
-		double maxSum = S.A[0].sumX();
-		for (int i = 0; i < S.n - 1; i++)
+		double maxSum = S.A[0].SumX();
+		for (int i = 1; i < S.n; i++)
 		{
-			if (maxSum < S.A[i + 1].sumX())
+			if (maxSum < S.A[i].SumX())
 			{
-				maxSum = S.A[i + 1].sumX();
+				maxSum = S.A[i].SumX();
 			}
 		}
 		return maxSum;
 	}
 
-	friend bool CompareMax(Data S, Data N)
+	friend void CompareMax(Data S, Data N)
 	{
-		if (MaxSum(S) > MaxSum(N))
+		if (MaxSumInA(S) > MaxSumInA(N))
 		{
-			return true;
+			cout << "Object 1 is max than Object 2 and it's value is ==> " << MaxSumInA(S) << el;
+			cout << "Data of object 1 is :" << el;
+			cout << S;
 		}
-		return false;
+		else
+		{
+			cout << "Object 2 is max than Object 1 and it's value is ==> " << MaxSumInA(N) << el;
+			cout << "Data of object 2 is :" << el;
+			cout << N;
+		}
 	}
+
 };
 
-int main() 
+void main()
 {
-	Data A, B;
 
-	cout << "Enter elements of A:" << el;
-	A.read();
+	Data obj1, obj2;
 
-	cout << "\nEnter elements of B:" << el;
-	B.read();
+	cout << "Enter elements of object 1:" << el;
+	obj1.Read();
 
-	cout << "\nMax sum between all A element is = " << MaxSum(A) << el;
-	cout << "Max sum between all B element is = " << MaxSum(B) << el;
+	cout << "\nEnter elements of object 2:" << el;
+	obj2.Read();
 
-	if (CompareMax(A, B))
-	{
-		cout << "A is Max than B And = " << MaxSum(A) << el;
-		cout << "A Data is:" << el;
-		cout << A;
-	}
-	else
-	{
-		cout << "B is Max than A And = " << MaxSum(B) << el;
-		cout << "B Data is:" << el;
-		cout << B;
-	}
-	return 0;
+	cout << "\nMax sum between all object 1 element is ==> " << MaxSumInA(obj1) << el;
+	cout << "Max sum between all object 2 element is ==> " << MaxSumInA(obj2) << el << el;
+
+	CompareMax(obj1, obj2);
+
 }
